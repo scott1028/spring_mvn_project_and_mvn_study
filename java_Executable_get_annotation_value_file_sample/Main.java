@@ -18,8 +18,6 @@ public class Main{
 	public static void main(String[] args){
 		Method[] m = Main.class.getMethods();
 		System.out.println(m.length);
-        
-		// Method m = Main.class.getMethod("main");
 		
 		for(Method pm:m){
 			if(pm.getName()=="main"){
@@ -27,6 +25,21 @@ public class Main{
 				System.out.println(bb);
 				System.out.println(bb.value());
 			}
+		}
+
+		System.out.println("----------------------------");
+		
+		// 這樣寫沒有 Try-Catch 將會跳錯。
+		// Java 不允許沒有處理到的 Exception 所以要用 Try-Catch 防範, 或在 main Method 後面加 throws Exception {}
+		try{
+			Method m2 = Main.class.getMethod("main", String[].class);
+			Test2 bb2 = m2.getAnnotation(Test2.class);
+			System.out.println(bb2);
+			System.out.println(bb2.value());
+			
+		}
+		catch(NoSuchMethodException e){
+			System.out.println(e.toString());
 		}
 	}
 }

@@ -3,6 +3,10 @@ package hello;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 
 @RestController
 public class HelloController {
@@ -19,11 +23,11 @@ public class HelloController {
     }
 
     // content-type set by self
+    // 另一種寫法指定 Content-Type
     @RequestMapping("/json2")
-    public ResponseEntity<String> index_json(HttpServletResponse response){
+    public ResponseEntity<String> index_json2(){
         HttpHeaders headers = new HttpHeaders();
-        // headers.setContentType(MediaType.TEXT_PLAIN);
-        headers.set("content-type", "application/json; charset=UTF-8");
+        headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<String>("{\"value\": 1}", headers,
                 HttpStatus.OK);
     }
